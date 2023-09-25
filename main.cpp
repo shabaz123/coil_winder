@@ -231,7 +231,6 @@ int main(void) {
     option_selection = OPTION_NULL;
 
     stdio_init_all();
-    //sleep_ms(3000); // could remove this after debugging, or keep it in
     // show spinning bar for 3 seconds, to give time for the user to connect to the serial port
     // if desired, for debugging.
     sleep_ms(100);
@@ -245,64 +244,9 @@ int main(void) {
     board_init(); // GPIO initialisation
     PICO_LED_ON;
 
-#ifdef JUNK
-    vfd.print(0, "Press 7");
-    //while(keypad.get_key_state('1') == KEY_UNPRESSED) {
-    //    sleep_ms(10);
-    //}
-    while(keypad.get_key_pressed() != '7') {
-        sleep_ms(10);
-    }
-    vfd.print(0, "Press 8");
-    while(keypad.get_key_pressed() != '8') {
-        sleep_ms(10);
-    }
-#endif
-
     keypad_timer_init();
     keypad_timer_start();
     keypad.clear_key_event();
-
-#ifdef JUNK
-    vfd.print(0, "Press 2");
-    while(keypad.get_key_event() != '2') {
-        sleep_ms(10);
-    }
-    keypad.clear_key_event();
-    vfd.print(0, "Press 3");
-    while(keypad.get_key_event() != '3') {
-        sleep_ms(10);
-    }
-    keypad.clear_key_event();
-
-
-    request_integer = 1;
-    keypad.set_integer(-1);
-    vfd.print(0, "IntA        ");
-    while(request_integer == 1) {
-        sleep_ms(10);
-    }
-    printf("got IntA\n");
-    sprintf(tbuf, "%d", keypad.get_integer());
-    vfd.print(0, tbuf);
-    while(keypad.get_key_event() != 'A') {
-        sleep_ms(10);
-    }
-    keypad.clear_key_event();
-    request_integer = 1;
-    keypad.set_integer(-1);
-    vfd.print(0, "IntB        ");
-    while(request_integer == 1) {
-        sleep_ms(10);
-    }
-    sprintf(tbuf, "%d", keypad.get_integer());
-    vfd.print(0, tbuf);
-    while(keypad.get_key_event() != 'A') {
-        sleep_ms(10);
-    }
-    keypad.clear_key_event();
-#endif
-
 
     vfd.print(0, "Turns: 0");
 
